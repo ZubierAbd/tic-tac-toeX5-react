@@ -71,16 +71,25 @@ function Game() {
             {renderSquare(0)}
             {renderSquare(1)}
             {renderSquare(2)}
+            {renderSquare(3)}
           </div>
           <div className="board-row">
-            {renderSquare(3)}
             {renderSquare(4)}
             {renderSquare(5)}
-          </div>
-          <div className="board-row">
             {renderSquare(6)}
             {renderSquare(7)}
+          </div>
+          <div className="board-row">
             {renderSquare(8)}
+            {renderSquare(9)}
+            {renderSquare(10)}
+            {renderSquare(11)}
+          </div>
+          <div className="board-row">
+            {renderSquare(12)}
+            {renderSquare(13)}
+            {renderSquare(14)}
+            {renderSquare(15)}
           </div>
         </div>
         <div className="game-info">{getStatus()}</div>
@@ -93,16 +102,38 @@ function Game() {
 ReactDOM.render(<Game />, document.getElementById("root"));
 
 function calculateWinner(squares) {
-  const possibleLines = [
+  const horizontal = [
     [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
+    [1, 2, 3],
+    [4, 5, 6],
+    [5, 6, 7],
+    [8, 9, 10],
+    [9, 10, 11],
+    [12, 13, 14],
+    [13, 14, 15]
   ];
+  const vertical = [
+    [0, 4, 8],
+    [4, 8, 12],
+    [1, 5, 9],
+    [5, 9, 13],
+    [2, 6, 10],
+    [6, 10, 13],
+    [3, 7, 11],
+    [7, 11, 15]
+  ];
+
+  const diag = [
+    [0, 5, 10],
+    [1, 6, 11],
+    [3, 6, 9],
+    [2, 5, 8],
+    [4, 9, 14],
+    [5, 10, 15],
+    [7, 10, 13],
+    [6, 9, 12]
+  ];
+  const possibleLines = [...diag, ...horizontal, ...vertical];
   // go over all possibly winning lines and check if they consist of only X's/only O's
   for (let i = 0; i < possibleLines.length; i++) {
     const [a, b, c] = possibleLines[i];
