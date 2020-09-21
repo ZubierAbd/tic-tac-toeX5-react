@@ -1,22 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-
-function Square({ value, onClick }) {
-  return (
-    <button className="square" onClick={onClick}>
-      {value}
-    </button>
-  );
-}
-
-function Restart({ onClick }) {
-  return (
-    <button className="restart" onClick={onClick}>
-      Play again
-    </button>
-  );
-}
+import { Restart } from "./components/Restart";
+import { Square } from "./components/Square";
 
 function Game() {
   const [squares, setSquares] = useState(Array(9).fill(null));
@@ -24,6 +10,7 @@ function Game() {
   const nextSymbol = isXNext ? "X" : "O";
   const winner = calculateWinner(squares);
 
+  /**Function to determine status of the board - winner/loser/draw */
   function getStatus() {
     if (winner) {
       return "Winner: " + winner;
